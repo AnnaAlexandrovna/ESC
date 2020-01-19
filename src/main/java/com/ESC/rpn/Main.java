@@ -14,21 +14,21 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 
 //        //тест 11
-        String s = "20+3";
-        RPNComputer test1 = new RPNComputer();
-        test1.madeTwoArray(s);
-        System.out.println(test1.count());
-        for (int i = 0; i < test1.operation.size(); i++) {
-            System.out.println(test1.operation.get(i));
-        }
-        for (int i = 0; i < test1.leksem.size(); i++) {
-            System.out.println(test1.leksem.get(i));
-        }
+//        String s = "20+3";
+//        RPNComputer test1 = new RPNComputer();
+//        test1.madeTwoArray(s);
+//        System.out.println(test1.count());
+//        for (int i = 0; i < test1.operation.size(); i++) {
+//            System.out.println(test1.operation.get(i));
+//        }
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
+//        }
 
         //тест 10
 //        String s = "3123-12";
@@ -38,8 +38,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 
 
@@ -51,8 +51,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 
         // тест 8
@@ -63,8 +63,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 
 
@@ -76,8 +76,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 
         //тест6
@@ -87,8 +87,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 //
 
@@ -99,8 +99,8 @@ public class Main {
 //        for (int i = 0; i < test1.operation.size(); i++) {
 //            System.out.println(test1.operation.get(i));
 //        }
-//        for (int i = 0; i < test1.leksem.size(); i++) {
-//            System.out.println(test1.leksem.get(i));
+//        for (int i = 0; i < test1.lexem.size(); i++) {
+//            System.out.println(test1.lexem.get(i));
 //        }
 //
 
@@ -121,12 +121,12 @@ public class Main {
 //        String s2 = "1234";
 //        com.ESC.rpn.Test1 test2 = new com.ESC.rpn.Test1();
 //        test1.isNumber(s);
-//        System.out.println(test1.leksem.get(0));
+//        System.out.println(test1.lexem.get(0));
 //
 //        //тест1, на то, что метод isNumber правильно работает
 //        String s1 = "12+34";
 //        com.ESC.rpn.Test1 test1 = new com.ESC.rpn.Test1();
 //        test1.isNumber(s);
-//        System.out.println(test1.leksem.get(0));
+//        System.out.println(test1.lexem.get(0));
     }
 }
