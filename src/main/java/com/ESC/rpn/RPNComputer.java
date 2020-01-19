@@ -1,5 +1,7 @@
 package com.ESC.rpn;
 
+import com.ESC.rpn.entities.Base;
+import com.ESC.rpn.entities.Decimal;
 import com.ESC.rpn.entities.Operation;
 
 import java.util.ArrayList;
@@ -12,31 +14,40 @@ public class RPNComputer {
     List<String> operation = new ArrayList<>();
     List<String> lexem = new LinkedList<>();
     List<Operation> supportedOperations = new ArrayList<>();
+    List<Base> supportedBases = new ArrayList<>();
 
     public RPNComputer() {
         supportedOperations.add(new Operation("+", false, (Integer a, Integer b) -> a + b));
         supportedOperations.add(new Operation("-", false, (Integer a, Integer b) -> a - b));
         supportedOperations.add(new Operation("*", false, (Integer a, Integer b) -> a * b));
         supportedOperations.add(new Operation("/", false, (Integer a, Integer b) -> a / b));
+
+        supportedBases.add(new Decimal());
     }
 
     public void parse(String expression, int base) {
+        Base baseEntity = null;
+        for (Base b : supportedBases) {
+            if (b.getBase() == base) {
+                baseEntity = b;
+            }
+        }
 
         while (!expression.isEmpty()) {
-            String remainder = tryToParse(expression, base, lexem, RPNComputer::isNumber);
+            String remainder = tryToParse(expression, base, lexem, baseEntity::isNumber);
             if (remainder.equals(expression)) {
-                remainder = tryToParse(expression, base, operation, RPNComputer::isOperation);
+                remainder = tryToParse(expression, base, operation, this::isOperation);
             }
             expression = remainder;
         }
     }
 
-    public String tryToParse(String expression, int base, List<String> arr, Function<Character, Boolean> whatTypeCharacterIs) {
+    public String tryToParse(String expression, int base, List<String> arr, Function<String, Boolean> whatTypeCharacterIs) {
         String accumulator = "";
         int position = 0;
-        Character firstSymbol;
+        String firstSymbol;
 
-        while (position <= expression.length() - 1 && whatTypeCharacterIs.apply(firstSymbol = expression.charAt(position++))) {
+        while (position <= expression.length() - 1 && whatTypeCharacterIs.apply(firstSymbol = String.valueOf(expression.charAt(position++)))) {
             accumulator += firstSymbol;
         }
 
@@ -49,16 +60,16 @@ public class RPNComputer {
     }
 
 
-    public static boolean isOperation(Character symbol) {
+    public boolean isOperation(String symbol) {
 
-        return Character.getType(symbol) == Character.MATH_SYMBOL || symbol == '-' || symbol == '*' || symbol == '-';
 
-    }
+        for (Operation operation : supportedOperations) {
+            if (symbol.toString().equals(operation.getValue())) {
+                return true;
+            }
+        }
 
-    public static boolean isNumber(Character symbol) {
-
-        return Character.getType(symbol) == Character.DECIMAL_DIGIT_NUMBER;
-
+        return false;
     }
 
     public String count() {
@@ -73,19 +84,16 @@ public class RPNComputer {
                         int term1 = Integer.parseInt(lexem.remove(0));
                         int term2 = Integer.parseInt(lexem.remove(0));
 
-                        if (operation1.equals("+")) {
+                        for (Operation op : supportedOperations) {
 
-                            int res = term1 + term2;
-                            result = res + "";
-                            lexem.add(0, result);
+                            if (operation1.equals(op.getValue())) {
+
+                                lexem.add(0, String.valueOf(op.getCalculate().apply(term1, term2)));
+                                result = lexem.get(0);
+                            }
                         }
 
-                        if (operation1.equals("-")) {
 
-                            int res = term1 - term2;
-                            result = res + "";
-                            lexem.add(0, result);
-                        }
                     } else {
                         result = "Недостаточно цифр для выполнения бинарной операции";
                         System.out.println("Недостаточно цифр для выполнения бинарной операции");
