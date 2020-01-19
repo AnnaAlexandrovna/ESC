@@ -17,11 +17,13 @@ public class RPNComputer {
     List<Base> supportedBases = new ArrayList<>();
 
     public RPNComputer() {
+        //TODO поддержать зависимость операций от СС
         supportedOperations.add(new Operation("+", false, (Integer a, Integer b) -> a + b));
         supportedOperations.add(new Operation("-", false, (Integer a, Integer b) -> a - b));
         supportedOperations.add(new Operation("*", false, (Integer a, Integer b) -> a * b));
         supportedOperations.add(new Operation("/", false, (Integer a, Integer b) -> a / b));
 
+        //TODO поддержать другие СС
         supportedBases.add(new Decimal());
     }
 
@@ -42,6 +44,17 @@ public class RPNComputer {
         }
     }
 
+    //TODO возникнут проблемы если цифра и функция начинается одинаково,
+    //например cos(a) и шестнадцатеричные числа, начинающиеся с "c"
+    //мб можно решить тем, что сначала ф=парсить функции, а потом числа
+
+    //TODO неясно как парсить функции из больше чем одного символа
+
+    //TODO реализовать унарные функции
+
+    //TODO реализовать скобки
+
+    //TODO тесты переписать, подумать какие случаи надо проверить
     public String tryToParse(String expression, int base, List<String> arr, Function<String, Boolean> whatTypeCharacterIs) {
         String accumulator = "";
         int position = 0;

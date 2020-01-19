@@ -5,6 +5,7 @@ import org.junit.Test;
 
 public class CountMethodTest {
 
+    // тут мы проверяет простое сложение двух аргументов
     @Test
     public void testCount1(){
         RPNComputer rpnc = new RPNComputer();
@@ -32,5 +33,8 @@ public class CountMethodTest {
         rpnc.parse("12/3", 10);
         Assert.assertEquals("4", rpnc.count());
     }
+
+    //деление на ноль, скобки, больше двух аргументов, унарные операции, вложенные скобки, вызов функции в функции
+    //границы инта
 
 }
