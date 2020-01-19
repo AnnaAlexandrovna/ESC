@@ -3,30 +3,30 @@ package com.ESC.rpn;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Test1 {
+public class RPNComputer {
 
     ArrayList operation = new ArrayList();
     LinkedList leksem = new LinkedList ();
     String stringOfNumber = "";
     String stringOfOperation = "";
     String allSimbol = "";
-    String firstSimbol = "";
+
 
     public String isNumber(String string) {
-
+        String firstSymbol = "";
         allSimbol = string;
         if (allSimbol.length() != 0) {
-            firstSimbol = allSimbol.substring(0, 1);
+            firstSymbol = allSimbol.substring(0, 1);
 
-            if (firstSimbol.equals("1") || firstSimbol.equals("0") || firstSimbol.equals("2") || firstSimbol.equals("3") ||
-                    firstSimbol.equals("4") || firstSimbol.equals("5")
-                    || firstSimbol.equals("6") || firstSimbol.equals("7") || firstSimbol.equals("8") || firstSimbol.equals("9")) {
+            if (firstSymbol.equals("1") || firstSymbol.equals("0") || firstSymbol.equals("2") || firstSymbol.equals("3") ||
+                    firstSymbol.equals("4") || firstSymbol.equals("5")
+                    || firstSymbol.equals("6") || firstSymbol.equals("7") || firstSymbol.equals("8") || firstSymbol.equals("9")) {
 
-                stringOfNumber = stringOfNumber + firstSimbol;
+                stringOfNumber = stringOfNumber + firstSymbol;
 
                 allSimbol = allSimbol.substring(1, allSimbol.length());
                 if (allSimbol.length() != 0) {
-                    firstSimbol = allSimbol.substring(0, 1);
+                    firstSymbol = allSimbol.substring(0, 1);
                     isNumber(allSimbol);
                 }
             }
@@ -35,25 +35,25 @@ public class Test1 {
                 leksem.add(stringOfNumber);
             }
             stringOfNumber = "";
-            firstSimbol = "";
         }
         return allSimbol;
     }
 
     public String isOperation(String string) {
+        String firstSymbol = "";
 
         allSimbol = string;
         if (allSimbol.length() != 0) {
 
-            firstSimbol = allSimbol.substring(0, 1);
+            firstSymbol = allSimbol.substring(0, 1);
 
-            if (firstSimbol.equals("+") || firstSimbol.equals("-")) {
+            if (firstSymbol.equals("+") || firstSymbol.equals("-")) {
 
-                stringOfOperation = stringOfOperation + firstSimbol;
+                stringOfOperation = stringOfOperation + firstSymbol;
 
                 allSimbol = allSimbol.substring(1, allSimbol.length());
                 if (allSimbol.length() != 0) {
-                    firstSimbol = allSimbol.substring(0, 1);
+                    firstSymbol = allSimbol.substring(0, 1);
 
                     isOperation(allSimbol);
                 }
@@ -63,7 +63,7 @@ public class Test1 {
                 operation.add(stringOfOperation);
             }
             stringOfOperation = "";
-            firstSimbol = "";
+            firstSymbol = "";
         }
         return allSimbol;
     }

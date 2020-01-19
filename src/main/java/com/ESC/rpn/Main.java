@@ -19,8 +19,8 @@ public class Main {
 //        }
 
 //        //тест 11
-        String s = "3123-12+1";
-        Test1 test1 = new Test1();
+        String s = "20+3";
+        RPNComputer test1 = new RPNComputer();
         test1.madeTwoArray(s);
         System.out.println(test1.count());
         for (int i = 0; i < test1.operation.size(); i++) {
