@@ -1,8 +1,6 @@
 package com.ESC.rpn;
 
-import com.ESC.rpn.entities.Base;
-import com.ESC.rpn.entities.Decimal;
-import com.ESC.rpn.entities.Operation;
+import com.ESC.rpn.entities.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -18,13 +16,18 @@ public class RPNComputer {
 
     public RPNComputer() {
         //TODO поддержать зависимость операций от СС
+        //интерфейс операция
+        //две реализации
         supportedOperations.add(new Operation("+", false, (Integer a, Integer b) -> a + b));
         supportedOperations.add(new Operation("-", false, (Integer a, Integer b) -> a - b));
         supportedOperations.add(new Operation("*", false, (Integer a, Integer b) -> a * b));
         supportedOperations.add(new Operation("/", false, (Integer a, Integer b) -> a / b));
 
+
         //TODO поддержать другие СС
         supportedBases.add(new Decimal());
+        supportedBases.add(new Binary());
+        supportedBases.add(new Hexadecimal());
     }
 
     public void parse(String expression, int base) {
@@ -56,7 +59,7 @@ public class RPNComputer {
 
     //TODO тесты переписать, подумать какие случаи надо проверить
     public String tryToParse(String expression, int base, List<String> arr, Function<String, Boolean> whatTypeCharacterIs) {
-        String accumulator = "";
+            String accumulator = "";
         int position = 0;
         String firstSymbol;
 
@@ -85,7 +88,24 @@ public class RPNComputer {
         return false;
     }
 
-    public String count() {
+    //count не должен быть паблик
+    //сделать приватным, вызывать из parse, передавать основание СС
+    public String count(int base) {
+        // <удолить>
+        Base baseEntity = null;
+        for (Base b : supportedBases) {
+            if (b.getBase() == base) {
+                baseEntity = b;
+            }
+        }
+        //</удолить>
+
+        //разделить получение результата и обработку ошибок
+        //сейчас одна переменная выполняет две роли
+        //как исправить:
+        //для бомжей - возвращать строку. Либо все хорошо и мы вернем строку с результатом, либо вернем сообщение об ошибке
+        //для нормальных пацанов - возвращать структуру {результат, флаг успешно, сообщение об ошибке}
+
         String result = "Вычисление не выполнено";
         int opSize = operation.size();
         if (opSize != 0) {
@@ -93,9 +113,13 @@ public class RPNComputer {
                 if (lexem.size() != 0) {
                     if (lexem.size() >= 2) {
                         String operation1 = operation.remove(0);
+
                         //2 символа для выполнения бинарной операции
-                        int term1 = Integer.parseInt(lexem.remove(0));
-                        int term2 = Integer.parseInt(lexem.remove(0));
+                        //наверное стоит класть в лексемы числа в десятичном формате
+                        //и убрать отсюда  baseEntity.toDecimal
+                        //можно будет везде после самого парсинга хранить числа как инт, а не как стринг
+                        int term1 = baseEntity.toDecimal(lexem.remove(0));
+                        int term2 = baseEntity.toDecimal(lexem.remove(0));
 
                         for (Operation op : supportedOperations) {
 
@@ -121,8 +145,7 @@ public class RPNComputer {
             result = "В строке не задано операций";
             System.out.println("В строке не задано операций");
         }
-
-        return result;
+        return baseEntity.fromDecimal(Integer.parseInt(result));
     }
 
 
